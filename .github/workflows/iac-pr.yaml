@@ -9,7 +9,7 @@ on:
     workflow_dispatch:
 
 env:
-    TF_VAR_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+    ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
     WORK_DIR: 'iac'
 
 jobs:
