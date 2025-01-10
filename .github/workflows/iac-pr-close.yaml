@@ -36,7 +36,7 @@ jobs:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
                   script: |
                     const prNumber = context.payload.pull_request.number;
-                    const workflowFileName = '${{ inputs.workflow-name }}';
+                    const workflowFileName = 'iac-pr.yaml';
                     let page = 1;
                     let workflow = null;
                     while (!workflow && page <= 10) {
