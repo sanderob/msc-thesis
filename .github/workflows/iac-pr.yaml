@@ -1,0 +1,114 @@
+name: Terraform PR to master
+
+on:
+    pull_request:
+        paths:
+            -   'iac/**'
+        branches:
+            -   master
+    workflow_dispatch:
+
+env:
+    ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    WORK_DIR: 'iac'
+
+jobs:
+    validate-and-plan-terraform:
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+            contents: read
+        steps:
+            # Checkout the repo
+            -   name: Checkout Repo
+                uses: actions/checkout@v4
+            # Setup Terraform and install it
+            -   name: Setup Terraform
+                uses: hashicorp/setup-terraform@v3
+                with:
+                    terraform_version: 1.10.4
+            # Run the terraform init command
+            -   name: Terraform Init
+                id: init
+                working-directory: ${{ env.WORK_DIR }}
+                run: terraform init -backend-config="backend.conf" -reconfigure
+            # Validate the Terraform code
+            -   name: Validate Terraform
+                working-directory: ${{ env.WORK_DIR }}
+                run: terraform validate
+            # Check the formatting of the code
+            -   name: Format Terraform
+                working-directory: ${{ env.WORK_DIR }}
+                id: format
+                run: terraform fmt -check -recursive
+            # Plan the Terraform changes
+            -   name: Plan Terraform
+                working-directory: ${{ env.WORK_DIR }}
+                id: plan
+                run: |
+                    terraform plan --var-file="terraform.tfvars" -no-color -out=plan.tfplan -input=false
+                    echo "exitcode=$?" >> $GITHUB_OUTPUT
+                continue-on-error: true
+            # Create a comment on the PR with the changes from the plan
+            -   name: Comment on PR
+                id: comment
+                uses: actions/github-script@v7
+                continue-on-error: true
+                env:
+                    PLAN: ${{ steps.plan.outputs.stdout }}
+                    PLAN_ERR: ${{ steps.plan.outputs.stderr }}
+                with:
+                    github-token: ${{ secrets.GITHUB_TOKEN }}
+                    script: |
+                        // 1. Define the contents of the comment
+                        const output = `#### Terraform Initialization: \`${{ steps.init.outcome }}\`
+                        #### Terraform Init: \`${{ steps.init.outcome }}\`
+                        #### Terraform Plan: \`${{ steps.plan.outcome }}\`
+                        
+                        <details>
+                        <summary>Plan Output</summary>
+                        
+                        \`\`\`
+                        ${process.env.PLAN}
+                        ${process.env.PLAN_ERR}
+                        \`\`\`
+                        
+                        </details>
+                        
+                        *Action: ${{ github.event_name }}*
+                        *Pusher: @${{ github.actor }} *`;
+                        
+                        // 2. Decide on whether to create a new comment or update an existing one
+                        const { data: comments } = await github.rest.issues.listComments({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          issue_number: context.issue.number,
+                        })
+                        const botComment = comments.find(comment => {
+                          return comment.user.type === 'Bot' && comment.body.includes('Terraform Format and Style')
+                        })
+
+                        // 3. Either create a new comment or update an existing one
+                        if (botComment) {
+                          github.rest.issues.updateComment({
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            comment_id: botComment.id,
+                            body: output
+                          })
+                        } else {
+                          github.rest.issues.createComment({
+                              issue_number: context.issue.number,
+                              owner: context.repo.owner,
+                              repo: context.repo.repo,
+                              body: output
+                          })
+                        }
+            -   name: Check if plan fails
+                run: exit ${{ steps.plan.outputs.exitcode }}
+            -   name: Upload plan artifact
+                uses: actions/upload-artifact@v4
+                with:
+                    name: plan.tfplan
+                    path: ${{ env.WORK_DIR }}/plan.tfplan
+                    if-no-files-found: error
