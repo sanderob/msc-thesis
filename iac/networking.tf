@@ -45,6 +45,7 @@ resource "azurerm_network_security_group" "fortideceptor-subnet-nsg" {
   security_rule {
     name                       = "AllowSSH"
     priority                   = 100
+    protocol                   = "Tcp"
     direction                  = "Inbound"
     access                     = "Allow"
     source_address_prefix      = "*"
@@ -54,9 +55,10 @@ resource "azurerm_network_security_group" "fortideceptor-subnet-nsg" {
   }
 
   security_rule {
-    name                       = "Allow_ports"
-    protocol                   = "tcp"
+    name                       = "AllowPorts"
+    protocol                   = "Tcp"
     direction                  = "Inbound"
+    access                     = "Allow"
     priority                   = 200
     source_address_prefix      = "*"
     destination_address_prefix = "*"

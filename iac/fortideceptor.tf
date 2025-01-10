@@ -66,5 +66,5 @@ resource "azurerm_virtual_machine_data_disk_attachment" "fortideceptor-data-disk
   virtual_machine_id = azurerm_linux_virtual_machine.fortideceptor-vm.id
   lun                = 0
   caching            = "ReadWrite"
-  create_option      = "attach"
+  create_option      = "Attach"
 }
