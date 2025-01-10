@@ -15,3 +15,8 @@ variable "client_id" {
   type        = string
   default     = "6eac731a-8b06-403f-8f44-8fc0f54cf642"
 }
+
+variable "client_secret" {
+  description = "The Azure client secret for the client ID"
+  type        = string
+}
