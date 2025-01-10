@@ -54,8 +54,8 @@ resource "azurerm_network_security_group" "fortideceptor-subnet-nsg" {
   }
 
   security_rule {
-    name                       = "Allow_ports"
-    protocol                   = "tcp"
+    name                       = "AllowPorts"
+    protocol                   = "Tcp"
     direction                  = "Inbound"
     priority                   = 200
     source_address_prefix      = "*"
