@@ -11,7 +11,7 @@ variable "location" {
 }
 
 variable "resource_group_name" {
-  description = "The Azure resource group name"
+  description = "The Azure resource group name."
   type        = string
   default     = "msc-prod-rg"
 }
