@@ -54,8 +54,12 @@ resource "azurerm_linux_virtual_machine" "fortideceptor-vm" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "StandardSSD_LRS"
-    disk_size_gb         = 100
+    disk_size_gb         = 1
     name                 = "fortideceptor-os-disk"
+  }
+
+  boot_diagnostics {
+    storage_account_uri = "https://mscprodst.blob.core.windows.net/"
   }
 
   source_image_id = "subscriptions/d1bbe07c-713a-4149-8c8e-313060b62dd0/resourceGroups/msc-prod-rg/providers/Microsoft.Compute/images/fortideceptor-vm-image"
