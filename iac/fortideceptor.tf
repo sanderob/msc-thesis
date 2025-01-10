@@ -25,8 +25,8 @@ resource "azurerm_network_interface" "fortideceptor-private-nic" {
 
 resource "azurerm_managed_disk" "fortideceptor-data-disk" {
   name                 = "fortideceptor-data-disk-0"
-  location             = var.resource_group_name
-  resource_group_name  = var.location
+  location             = var.location
+  resource_group_name  = var.resource_group_name
   create_option        = "Empty"
   storage_account_type = "StandardSSD_ZRS"
   disk_size_gb         = 1024
