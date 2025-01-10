@@ -53,8 +53,8 @@ resource "azurerm_linux_virtual_machine" "fortideceptor-vm" {
 
   os_disk {
     caching              = "ReadWrite"
-    storage_account_type = "Standard_LRS"
-    disk_size_gb         = 500
+    storage_account_type = "StandardSSD_LRS"
+    disk_size_gb         = 100
     name                 = "fortideceptor-os-disk"
   }
 
