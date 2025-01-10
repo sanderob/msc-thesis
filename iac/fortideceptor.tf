@@ -36,7 +36,7 @@ resource "azurerm_linux_virtual_machine" "fortideceptor-vm" {
   name                = "fortideceptor"
   resource_group_name = var.resource_group_name
   location            = var.location
-  size                = "B2s"
+  size                = "Standard_B2s"
 
   network_interface_ids = [
     azurerm_network_interface.fortideceptor-public-nic.id,
