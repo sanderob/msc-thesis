@@ -62,6 +62,10 @@ resource "azurerm_linux_virtual_machine" "fortideceptor-vm" {
     storage_account_uri = "https://mscprodst.blob.core.windows.net/"
   }
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   source_image_id = "/subscriptions/d1bbe07c-713a-4149-8c8e-313060b62dd0/resourceGroups/msc-prod-rg/providers/Microsoft.Compute/images/fortideceptor-vm-image"
 }
 
