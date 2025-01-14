@@ -28,7 +28,7 @@ resource "azurerm_managed_disk" "fortideceptor-data-disk" {
   location             = var.location
   resource_group_name  = var.resource_group_name
   create_option        = "Empty"
-  storage_account_type = "StandardSSD_ZRS"
+  storage_account_type = "StandardSSD_LRS"
   disk_size_gb         = 1024
 }
 
