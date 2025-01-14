@@ -28,7 +28,7 @@ resource "azurerm_managed_disk" "fortideceptor-data-disk" {
   location             = var.location
   resource_group_name  = var.resource_group_name
   create_option        = "Empty"
-  storage_account_type = "StandardSSD_ZRS"
+  storage_account_type = "StandardSSD_LRS"
   disk_size_gb         = 1024
 }
 
@@ -58,7 +58,15 @@ resource "azurerm_linux_virtual_machine" "fortideceptor-vm" {
     name                 = "fortideceptor-os-disk"
   }
 
-  source_image_id = "subscriptions/d1bbe07c-713a-4149-8c8e-313060b62dd0/resourceGroups/msc-prod-rg/providers/Microsoft.Compute/images/fortideceptor-vm-image"
+  boot_diagnostics {
+    storage_account_uri = "https://mscprodst.blob.core.windows.net/"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  source_image_id = "/subscriptions/d1bbe07c-713a-4149-8c8e-313060b62dd0/resourceGroups/msc-prod-rg/providers/Microsoft.Compute/images/fortideceptor-vm-image"
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "fortideceptor-data-disk-attachment" {
