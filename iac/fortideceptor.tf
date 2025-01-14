@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "fortideceptor-private-nic" {
 
   ip_configuration {
     name                          = "private"
-    subnet_id                     = azurerm_subnet.fortideceptor-subnet.id
+    subnet_id                     = azurerm_subnet.decoy-subnet.id
     private_ip_address_allocation = "Dynamic"
   }
 }
