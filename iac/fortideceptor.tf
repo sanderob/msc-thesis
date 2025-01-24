@@ -6,7 +6,8 @@ resource "azurerm_network_interface" "fortideceptor-management-nic" {
   ip_configuration {
     name                          = "public"
     subnet_id                     = azurerm_subnet.fortideceptor-subnet.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.1.4"
     public_ip_address_id          = azurerm_public_ip.fortideceptor-public-ip.id
   }
 }
@@ -19,7 +20,8 @@ resource "azurerm_network_interface" "fortideceptor-decoy-nic" {
   ip_configuration {
     name                          = "private"
     subnet_id                     = azurerm_subnet.decoy-subnet.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.2.4"
   }
 }
 
