@@ -1,7 +1,7 @@
 resource "azurerm_network_interface" "fortideceptor-public-nic" {
   name                = "fortideceptor-public-nic"
-  resource_group_name = var.resource_group_name
-  location            = var.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
+  location            = azurerm_resource_group.msc-rg.location
 
   ip_configuration {
     name                          = "public"
@@ -13,8 +13,8 @@ resource "azurerm_network_interface" "fortideceptor-public-nic" {
 
 resource "azurerm_network_interface" "fortideceptor-private-nic" {
   name                = "fortideceptor-private-nic"
-  resource_group_name = var.resource_group_name
-  location            = var.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
+  location            = azurerm_resource_group.msc-rg.location
 
   ip_configuration {
     name                          = "private"
@@ -25,8 +25,8 @@ resource "azurerm_network_interface" "fortideceptor-private-nic" {
 
 resource "azurerm_managed_disk" "fortideceptor-data-disk" {
   name                 = "fortideceptor-data-disk-0"
-  location             = var.location
-  resource_group_name  = var.resource_group_name
+  resource_group_name  = azurerm_resource_group.msc-rg.name
+  location             = azurerm_resource_group.msc-rg.location
   create_option        = "Empty"
   storage_account_type = "StandardSSD_LRS"
   disk_size_gb         = 1024
@@ -34,8 +34,8 @@ resource "azurerm_managed_disk" "fortideceptor-data-disk" {
 
 resource "azurerm_linux_virtual_machine" "fortideceptor-vm" {
   name                = "fortideceptor"
-  resource_group_name = var.resource_group_name
-  location            = var.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
+  location            = azurerm_resource_group.msc-rg.location
   size                = "Standard_B2s"
 
   network_interface_ids = [

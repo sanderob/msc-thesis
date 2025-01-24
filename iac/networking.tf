@@ -1,7 +1,7 @@
 resource "azurerm_virtual_network" "vnet" {
   name                = "msc-vnet"
-  location            = var.location
-  resource_group_name = var.resource_group_name
+  location            = azurerm_resource_group.msc-rg.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
   address_space = [
     "10.0.0.0/16"
   ]
@@ -9,7 +9,7 @@ resource "azurerm_virtual_network" "vnet" {
 
 resource "azurerm_subnet" "fortideceptor-subnet" {
   name                 = "fortideceptor-subnet"
-  resource_group_name  = var.resource_group_name
+  resource_group_name  = azurerm_resource_group.msc-rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes = [
     "10.0.1.0/24"
@@ -18,7 +18,7 @@ resource "azurerm_subnet" "fortideceptor-subnet" {
 
 resource "azurerm_subnet" "decoy-subnet" {
   name                 = "decoy-subnet"
-  resource_group_name  = var.resource_group_name
+  resource_group_name  = azurerm_resource_group.msc-rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes = [
     "10.0.2.0/24"
@@ -27,8 +27,8 @@ resource "azurerm_subnet" "decoy-subnet" {
 
 resource "azurerm_network_security_group" "fortideceptor-subnet-nsg" {
   name                = "fortideceptor-subnet-nsg"
-  location            = var.location
-  resource_group_name = var.resource_group_name
+  location            = azurerm_resource_group.msc-rg.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
 
   security_rule {
     name                       = "AllowAllOutbound"
@@ -78,8 +78,8 @@ resource "azurerm_subnet_network_security_group_association" "fortideceptor-subn
 
 resource "azurerm_public_ip" "fortideceptor-public-ip" {
   name                = "fortideceptor-public-ip"
-  location            = var.location
-  resource_group_name = var.resource_group_name
+  location            = azurerm_resource_group.msc-rg.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
   ip_version          = "IPv4"
