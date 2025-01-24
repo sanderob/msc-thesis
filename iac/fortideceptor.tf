@@ -1,5 +1,5 @@
-resource "azurerm_network_interface" "fortideceptor-public-nic" {
-  name                = "fortideceptor-public-nic"
+resource "azurerm_network_interface" "fortideceptor-management-nic" {
+  name                = "fortideceptor-management-nic"
   resource_group_name = azurerm_resource_group.msc-rg.name
   location            = azurerm_resource_group.msc-rg.location
 
@@ -11,8 +11,8 @@ resource "azurerm_network_interface" "fortideceptor-public-nic" {
   }
 }
 
-resource "azurerm_network_interface" "fortideceptor-private-nic" {
-  name                = "fortideceptor-private-nic"
+resource "azurerm_network_interface" "fortideceptor-decoy-nic" {
+  name                = "fortideceptor-decoy-nic-1"
   resource_group_name = azurerm_resource_group.msc-rg.name
   location            = azurerm_resource_group.msc-rg.location
 
@@ -39,8 +39,8 @@ resource "azurerm_linux_virtual_machine" "fortideceptor-vm" {
   size                = "Standard_B2s"
 
   network_interface_ids = [
-    azurerm_network_interface.fortideceptor-public-nic.id,
-    azurerm_network_interface.fortideceptor-private-nic.id
+    azurerm_network_interface.fortideceptor-management-nic.id,
+    azurerm_network_interface.fortideceptor-decoy-nic.id
   ]
 
   admin_username                  = "fortideceptor"
