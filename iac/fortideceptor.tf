@@ -1,25 +1,29 @@
-resource "azurerm_network_interface" "fortideceptor-public-nic" {
-  name                = "fortideceptor-public-nic"
+resource "azurerm_network_interface" "fortideceptor-management-nic" {
+  name                = "fortideceptor-management-nic"
   resource_group_name = azurerm_resource_group.msc-rg.name
   location            = azurerm_resource_group.msc-rg.location
 
   ip_configuration {
-    name                          = "public"
+    name                          = "management"
     subnet_id                     = azurerm_subnet.fortideceptor-subnet.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.1.4"
+    primary                       = true
     public_ip_address_id          = azurerm_public_ip.fortideceptor-public-ip.id
   }
 }
 
-resource "azurerm_network_interface" "fortideceptor-private-nic" {
-  name                = "fortideceptor-private-nic"
+resource "azurerm_network_interface" "fortideceptor-decoy-nic" {
+  name                = "fortideceptor-decoy-nic-1"
   resource_group_name = azurerm_resource_group.msc-rg.name
   location            = azurerm_resource_group.msc-rg.location
 
   ip_configuration {
-    name                          = "private"
+    name                          = "decoy-1"
     subnet_id                     = azurerm_subnet.decoy-subnet.id
-    private_ip_address_allocation = "Dynamic"
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.2.4"
+    primary                       = true
   }
 }
 
@@ -39,8 +43,8 @@ resource "azurerm_linux_virtual_machine" "fortideceptor-vm" {
   size                = "Standard_B2s"
 
   network_interface_ids = [
-    azurerm_network_interface.fortideceptor-public-nic.id,
-    azurerm_network_interface.fortideceptor-private-nic.id
+    azurerm_network_interface.fortideceptor-management-nic.id,
+    azurerm_network_interface.fortideceptor-decoy-nic.id
   ]
 
   admin_username                  = "fortideceptor"
