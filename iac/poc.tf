@@ -67,7 +67,7 @@ resource "azurerm_virtual_network_peering" "poc-decoy-vnet-peering" {
   name                      = "poc-decoy-vnet-peering"
   resource_group_name       = azurerm_resource_group.msc-rg.name
   virtual_network_name      = azurerm_virtual_network.poc-vnet.name
-  remote_virtual_network_id = azurerm_virtual_network.fd-vnet.id
+  remote_virtual_network_id = azurerm_virtual_network.vnet.id
 
   allow_virtual_network_access           = true
   allow_forwarded_traffic                = true
