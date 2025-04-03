@@ -8,7 +8,7 @@ resource "azurerm_linux_virtual_machine" "poc-vm" {
     azurerm_network_interface.poc-nic,
   ]
 
-  admin_username                  = "admin"
+  admin_username                  = "debian"
   disable_password_authentication = true
 
   admin_ssh_key {
