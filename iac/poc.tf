@@ -5,7 +5,7 @@ resource "azurerm_linux_virtual_machine" "poc-vm" {
   size                = "Standard_B2ats_v2"
 
   network_interface_ids = [
-    azurerm_network_interface.poc-nic,
+    azurerm_network_interface.poc-nic.id,
   ]
 
   admin_username                  = "debian"
