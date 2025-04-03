@@ -102,3 +102,62 @@ resource "azurerm_subnet" "poc-subnet-1" {
     "10.1.1.0/24"
   ]
 }
+
+resource "azurerm_network_security_group" "poc-nsg" {
+  name                = "poc-nsg"
+  location            = azurerm_resource_group.msc-rg.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
+
+  security_rule {
+    name                         = "DenySubnet"
+    priority                     = 1000
+    direction                    = "Outbound"
+    access                       = "Deny"
+    protocol                     = "*"
+    source_port_range            = "*"
+    destination_port_range       = "*"
+    source_address_prefix        = "*"
+    destination_address_prefixes = azurerm_subnet.decoy-subnet.address_prefixes
+  }
+
+  security_rule {
+    name                       = "AllowAllOutbound"
+    priority                   = 1001
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "Internet"
+  }
+
+  security_rule {
+    name                       = "AllowSSH"
+    priority                   = 100
+    protocol                   = "Tcp"
+    direction                  = "Inbound"
+    access                     = "Allow"
+    source_address_prefix      = "*"
+    destination_address_prefix = "${azurerm_public_ip.poc-vm-public-ip.ip_address}/32"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+  }
+
+  security_rule {
+    name                       = "AllowDecoyIP"
+    priority                   = 200
+    protocol                   = "*"
+    direction                  = "Outbound"
+    access                     = "Allow"
+    source_address_prefix      = "*"
+    destination_address_prefix = "10.0.1.10/32"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "poc-subnet-1-nsg-association" {
+  subnet_id                 = azurerm_subnet.poc-subnet-1.id
+  network_security_group_id = azurerm_network_security_group.poc-nsg.id
+}
