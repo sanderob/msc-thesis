@@ -57,7 +57,7 @@ resource "azurerm_network_interface" "poc-nic" {
     name                          = "poc-vm-ipconfig"
     subnet_id                     = azurerm_subnet.poc-subnet-1.id
     private_ip_address_allocation = "Static"
-    private_ip_address            = "10.1.1.2"
+    private_ip_address            = "10.1.1.4"
     primary                       = true
     public_ip_address_id          = azurerm_public_ip.poc-vm-public-ip.id
   }
