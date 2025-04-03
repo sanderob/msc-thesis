@@ -19,7 +19,7 @@ resource "azurerm_linux_virtual_machine" "poc-vm" {
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "StandardSSD_LRS"
-    disk_size_gb         = 20
+    disk_size_gb         = 40
     name                 = "poc-vm-os-disk"
   }
 
