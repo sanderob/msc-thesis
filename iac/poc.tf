@@ -122,7 +122,7 @@ resource "azurerm_network_security_group" "poc-vnet-nsg" {
 
   security_rule {
     name                       = "AllowDecoy"
-    priority                   = 1001
+    priority                   = 900
     direction                  = "Outbound"
     access                     = "Allow"
     protocol                   = "*"
