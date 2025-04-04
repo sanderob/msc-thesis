@@ -102,9 +102,13 @@ resource "azurerm_virtual_network_peering" "decoy-poc-vnet-peering" {
   peer_complete_virtual_networks_enabled = false
   use_remote_gateways                    = false
 
-  local_subnet_names = []
+  local_subnet_names = [
+    azurerm_subnet.decoy-subnet.name
+  ]
 
-  remote_subnet_names = []
+  remote_subnet_names = [
+    azurerm_subnet.poc-subnet-1.name
+  ]
 }
 
 resource "azurerm_virtual_network" "poc-vnet" {
