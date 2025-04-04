@@ -121,14 +121,14 @@ resource "azurerm_network_security_group" "poc-vnet-nsg" {
   }
 
   security_rule {
-    name = "AllowDecoy"
-    priority = 1001
-    direction = "Outbound"
-    access = "Allow"
-    protocol = "*"
-    source_port_range = "*"
-    destination_port_range = "*"
-    source_address_prefix = "${azurerm_linux_virtual_machine.poc-vm.private_ip_address}/32"
+    name                       = "AllowDecoy"
+    priority                   = 1001
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "${azurerm_linux_virtual_machine.poc-vm.private_ip_address}/32"
     destination_address_prefix = "10.0.2.11/32"
   }
 }
@@ -144,15 +144,15 @@ resource "azurerm_network_security_group" "poc-nic-nsg" {
   resource_group_name = azurerm_resource_group.msc-rg.name
 
   security_rule {
-    name = "AllowSSH"
-    priority = 100
-    protocol = "Tcp"
-    direction = "Inbound"
-    access = "Allow"
-    source_address_prefix = "*"
+    name                       = "AllowSSH"
+    priority                   = 100
+    protocol                   = "Tcp"
+    direction                  = "Inbound"
+    access                     = "Allow"
+    source_address_prefix      = "*"
     destination_address_prefix = "${azurerm_linux_virtual_machine.poc-vm.public_ip_address}/32"
-    source_port_range = "*"
-    destination_port_range = "22"
+    source_port_range          = "*"
+    destination_port_range     = "22"
   }
 }
 
