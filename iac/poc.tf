@@ -83,6 +83,11 @@ resource "azurerm_virtual_network_peering" "poc-decoy-vnet-peering" {
   remote_subnet_names = [
     azurerm_subnet.decoy-subnet.name
   ]
+  
+  triggers = {
+    remote_address_space = join(",", azurerm_virtual_network.vnet.address_space)
+  }
+
 }
 
 resource "azurerm_virtual_network" "poc-vnet" {
