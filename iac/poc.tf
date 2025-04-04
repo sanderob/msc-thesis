@@ -103,8 +103,8 @@ resource "azurerm_subnet" "poc-subnet-1" {
   ]
 }
 
-resource "azurerm_network_security_group" "poc-nsg" {
-  name                = "poc-nsg"
+resource "azurerm_network_security_group" "poc-vnet-nsg" {
+  name                = "poc-vnet-nsg"
   location            = azurerm_resource_group.msc-rg.location
   resource_group_name = azurerm_resource_group.msc-rg.name
 
@@ -121,16 +121,27 @@ resource "azurerm_network_security_group" "poc-nsg" {
   }
 
   security_rule {
-    name                       = "AllowAllOutbound"
+    name                       = "AllowDecoy"
     priority                   = 1001
     direction                  = "Outbound"
     access                     = "Allow"
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "Internet"
+    source_address_prefix      = "${azurerm_linux_virtual_machine.poc-vm.private_ip_address}/32"
+    destination_address_prefix = "10.0.2.11/32"
   }
+}
+
+resource "azurerm_subnet_network_security_group_association" "poc-subnet-1-nsg-association" {
+  subnet_id                 = azurerm_subnet.poc-subnet-1.id
+  network_security_group_id = azurerm_network_security_group.poc-vnet-nsg.id
+}
+
+resource "azurerm_network_security_group" "poc-nic-nsg" {
+  name                = "poc-nic-nsg"
+  location            = azurerm_resource_group.msc-rg.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
 
   security_rule {
     name                       = "AllowSSH"
@@ -139,25 +150,13 @@ resource "azurerm_network_security_group" "poc-nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     source_address_prefix      = "*"
-    destination_address_prefix = "${azurerm_public_ip.poc-vm-public-ip.ip_address}/32"
+    destination_address_prefix = "${azurerm_linux_virtual_machine.poc-vm.public_ip_address}/32"
     source_port_range          = "*"
     destination_port_range     = "22"
   }
-
-  security_rule {
-    name                       = "AllowDecoyIP"
-    priority                   = 200
-    protocol                   = "*"
-    direction                  = "Outbound"
-    access                     = "Allow"
-    source_address_prefix      = "*"
-    destination_address_prefix = "10.0.1.10/32"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-  }
 }
 
-resource "azurerm_subnet_network_security_group_association" "poc-subnet-1-nsg-association" {
-  subnet_id                 = azurerm_subnet.poc-subnet-1.id
-  network_security_group_id = azurerm_network_security_group.poc-nsg.id
+resource "azurerm_network_interface_security_group_association" "poc-nic-nsg-association" {
+  network_interface_id      = azurerm_network_interface.poc-nic.id
+  network_security_group_id = azurerm_network_security_group.poc-nic-nsg.id
 }
