@@ -71,6 +71,17 @@ resource "azurerm_network_security_group" "fortideceptor-subnet-nsg" {
   }
 }
 
+resource "azurerm_network_security_group" "decoy-subnet-nsg" {
+  name                = "decoy-subnet-nsg"
+  location            = azurerm_resource_group.msc-rg.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
+}
+
+resource "azurerm_subnet_network_security_group_association" "decoy-subnet-nsg-association" {
+  subnet_id                 = azurerm_subnet.decoy-subnet.id
+  network_security_group_id = azurerm_network_security_group.decoy-subnet-nsg.id
+}
+
 resource "azurerm_subnet_network_security_group_association" "fortideceptor-subnet-nsg-association" {
   subnet_id                 = azurerm_subnet.fortideceptor-subnet.id
   network_security_group_id = azurerm_network_security_group.fortideceptor-subnet-nsg.id
