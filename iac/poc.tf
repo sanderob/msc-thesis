@@ -157,6 +157,17 @@ resource "azurerm_network_security_group" "poc-vnet-nsg" {
     source_address_prefix      = "${azurerm_linux_virtual_machine.poc-vm.private_ip_address}/32"
     destination_address_prefix = "10.0.2.11/32"
   }
+    security_rule {
+    name                       = "AllowSSH"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "${azurerm_linux_virtual_machine.poc-vm.public_ip_address}/32"
+  }
 }
 
 resource "azurerm_subnet_network_security_group_association" "poc-subnet-1-nsg-association" {
