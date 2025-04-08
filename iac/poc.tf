@@ -95,8 +95,8 @@ resource "azurerm_virtual_network_peering" "decoy-poc-vnet-peering" {
   virtual_network_name      = azurerm_virtual_network.vnet.name
   remote_virtual_network_id = azurerm_virtual_network.poc-vnet.id
 
-  allow_virtual_network_access           = false
-  allow_forwarded_traffic                = false
+  allow_virtual_network_access           = true
+  allow_forwarded_traffic                = true
   allow_gateway_transit                  = false
   only_ipv6_peering_enabled              = false
   peer_complete_virtual_networks_enabled = false
