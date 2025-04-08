@@ -25,6 +25,14 @@ resource "azurerm_network_interface" "fortideceptor-decoy-nic" {
     private_ip_address            = "10.0.2.4"
     primary                       = true
   }
+
+  ip_configuration {
+    name                          = "decoy-2"
+    subnet_id                     = azurerm_subnet.decoy-subnet.id
+    private_ip_address_allocation = "Static"
+    private_ip_address            = "10.0.2.11"
+    primary                       = false
+  }
 }
 
 resource "azurerm_managed_disk" "fortideceptor-data-disk" {
