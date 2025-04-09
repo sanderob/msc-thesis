@@ -9,7 +9,7 @@ resource "azurerm_virtual_network" "poc-local-vnet" {
 }
 
 resource "azurerm_subnet" "poc-local-subnet-1" {
-  name                 = "poc-local-gateway-subnet"
+  name                 = "GatewaySubnet"
   resource_group_name  = azurerm_resource_group.msc-rg.name
   virtual_network_name = azurerm_virtual_network.poc-local-vnet.name
   address_prefixes = [
