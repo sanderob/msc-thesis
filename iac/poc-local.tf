@@ -36,3 +36,21 @@ resource "azurerm_public_ip" "poc-local-public-ip" {
   sku                 = "Standard"
   ip_version          = "IPv4"
 }
+
+resource "azurerm_virtual_network_gateway" "poc-local-vnet-gateway" {
+  name                = "poc-local-vnet-gateway"
+  location            = azurerm_resource_group.msc-rg.location
+  resource_group_name = azurerm_resource_group.msc-rg.name
+
+  type     = "Vpn"
+  vpn_type = "RouteBased"
+
+  sku           = "Basic"
+
+  ip_configuration {
+    name                          = "vnetGatewayConfig"
+    public_ip_address_id          = azurerm_public_ip.poc-local-public-ip.id
+    private_ip_address_allocation = "Static"
+    subnet_id                     = azurerm_subnet.poc-local-subnet-1.id
+  }
+}
