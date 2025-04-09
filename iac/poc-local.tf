@@ -11,7 +11,7 @@ resource "azurerm_virtual_network" "poc-local-vnet" {
 resource "azurerm_subnet" "poc-local-subnet-1" {
   name                 = "poc-local-gateway-subnet"
   resource_group_name  = azurerm_resource_group.msc-rg.name
-  virtual_network_name = azurerm_virtual_network.poc-vnet.name
+  virtual_network_name = azurerm_virtual_network.poc-local-vnet.name
   address_prefixes = [
     "10.2.1.0/24"
   ]
@@ -79,7 +79,7 @@ resource "azurerm_virtual_network_peering" "poc-local-decoy-vnet-peering" {
 }
 
 resource "azurerm_virtual_network_peering" "decoy-poc-local-vnet-peering" {
-  name                      = "decoy-poc-vnet-peering"
+  name                      = "decoy-poc-local-vnet-peering"
   resource_group_name       = azurerm_resource_group.msc-rg.name
   virtual_network_name      = azurerm_virtual_network.vnet.name
   remote_virtual_network_id = azurerm_virtual_network.poc-local-vnet.id
