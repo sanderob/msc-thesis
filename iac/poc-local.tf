@@ -45,7 +45,7 @@ resource "azurerm_virtual_network_gateway" "poc-local-vnet-gateway" {
   type     = "Vpn"
   vpn_type = "RouteBased"
 
-  sku           = "Basic"
+  sku = "Basic"
 
   ip_configuration {
     name                          = "vnetGatewayConfig"
