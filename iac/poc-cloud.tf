@@ -166,7 +166,7 @@ resource "azurerm_network_security_group" "poc-vnet-nsg" {
     source_port_range          = "*"
     destination_port_range     = "22"
     source_address_prefix      = "*"
-    destination_address_prefix = "${azurerm_linux_virtual_machine.poc-vm.public_ip_address}/32"
+    destination_address_prefix = "*"
   }
 }
 
@@ -187,7 +187,7 @@ resource "azurerm_network_security_group" "poc-nic-nsg" {
     direction                  = "Inbound"
     access                     = "Allow"
     source_address_prefix      = "*"
-    destination_address_prefix = "${azurerm_linux_virtual_machine.poc-vm.public_ip_address}/32"
+    destination_address_prefix = "*"
     source_port_range          = "*"
     destination_port_range     = "22"
   }
