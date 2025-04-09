@@ -15,6 +15,7 @@ env:
     ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
     ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+    TF_VAR_poc-local-vpn-shared-key: ${{ secrets.POC_LOCAL_VPN_SHARED_KEY }}
     WORK_DIR: 'iac'
 
 jobs:
