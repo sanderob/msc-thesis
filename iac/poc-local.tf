@@ -22,7 +22,7 @@ resource "azurerm_network_security_group" "poc-local-vnet-nsg" {
   location            = azurerm_resource_group.msc-rg.location
   resource_group_name = azurerm_resource_group.msc-rg.name
 
-    security_rule {
+  security_rule {
     name                         = "DenySubnet"
     priority                     = 1000
     direction                    = "Outbound"
