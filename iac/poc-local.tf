@@ -28,6 +28,54 @@ resource "azurerm_subnet_network_security_group_association" "poc-local-subnet-1
   network_security_group_id = azurerm_network_security_group.poc-local-vnet-nsg.id
 }
 
+resource "azurerm_virtual_network_peering" "poc-local-decoy-vnet-peering" {
+  name                      = "poc-local-decoy-vnet-peering"
+  resource_group_name       = azurerm_resource_group.msc-rg.name
+  virtual_network_name      = azurerm_virtual_network.poc-local-vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.vnet.id
+
+  allow_virtual_network_access           = true
+  allow_forwarded_traffic                = true
+  allow_gateway_transit                  = false
+  only_ipv6_peering_enabled              = false
+  peer_complete_virtual_networks_enabled = false
+  use_remote_gateways                    = false
+
+  local_subnet_names = [
+    azurerm_subnet.poc-local-subnet-1.name
+  ]
+
+  remote_subnet_names = [
+    azurerm_subnet.decoy-subnet.name
+  ]
+
+  triggers = {
+    remote_address_space = join(",", azurerm_virtual_network.vnet.address_space)
+  }
+}
+
+resource "azurerm_virtual_network_peering" "decoy-poc-local-vnet-peering" {
+  name                      = "decoy-poc-vnet-peering"
+  resource_group_name       = azurerm_resource_group.msc-rg.name
+  virtual_network_name      = azurerm_virtual_network.vnet.name
+  remote_virtual_network_id = azurerm_virtual_network.poc-local-vnet.id
+
+  allow_virtual_network_access           = true
+  allow_forwarded_traffic                = true
+  allow_gateway_transit                  = false
+  only_ipv6_peering_enabled              = false
+  peer_complete_virtual_networks_enabled = false
+  use_remote_gateways                    = false
+
+  local_subnet_names = [
+    azurerm_subnet.decoy-subnet.name
+  ]
+
+  remote_subnet_names = [
+    azurerm_subnet.poc-local-subnet-1.name
+  ]
+}
+
 resource "azurerm_public_ip" "poc-local-public-ip" {
   name                = "poc-local-ip"
   location            = azurerm_resource_group.msc-rg.location
