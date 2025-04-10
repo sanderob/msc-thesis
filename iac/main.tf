@@ -9,7 +9,7 @@ module "core" {
 
 module "poc-local" {
   source = "./poc-local"
-  poc-local-vpn-shared-key = module.poc-local.poc-local-vpn-shared-key
+  poc-local-vpn-shared-key = var.poc-local-vpn-shared-key
 }
 
 module "poc-cloud" {
