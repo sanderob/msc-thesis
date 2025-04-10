@@ -12,6 +12,6 @@ module "poc-cloud" {
 }
 
 module "poc-cloud" {
-  source = "./poc-cloud"
+  source                   = "./poc-cloud"
   poc-local-vpn-shared-key = module.poc-local.poc-local-vpn-shared-key
 }
