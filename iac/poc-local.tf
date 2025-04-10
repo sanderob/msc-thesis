@@ -17,41 +17,6 @@ resource "azurerm_subnet" "poc-local-subnet-1" {
   ]
 }
 
-resource "azurerm_network_security_group" "poc-local-vnet-nsg" {
-  name                = "poc-local-vnet-nsg"
-  location            = azurerm_resource_group.msc-rg.location
-  resource_group_name = azurerm_resource_group.msc-rg.name
-
-  security_rule {
-    name                         = "DenySubnet"
-    priority                     = 1000
-    direction                    = "Outbound"
-    access                       = "Deny"
-    protocol                     = "*"
-    source_port_range            = "*"
-    destination_port_range       = "*"
-    source_address_prefix        = "*"
-    destination_address_prefixes = azurerm_subnet.decoy-subnet.address_prefixes
-  }
-
-  security_rule {
-    name                       = "AllowDecoy"
-    priority                   = 900
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "${azurerm_linux_virtual_machine.poc-vm.private_ip_address}/32" # NEEDS TO BE UPDATED
-    destination_address_prefix = "10.0.2.12/32"
-  }
-}
-
-resource "azurerm_subnet_network_security_group_association" "poc-local-subnet-1-nsg-association" {
-  subnet_id                 = azurerm_subnet.poc-local-subnet-1.id
-  network_security_group_id = azurerm_network_security_group.poc-local-vnet-nsg.id
-}
-
 resource "azurerm_virtual_network_peering" "poc-local-decoy-vnet-peering" {
   name                      = "poc-local-decoy-vnet-peering"
   resource_group_name       = azurerm_resource_group.msc-rg.name
