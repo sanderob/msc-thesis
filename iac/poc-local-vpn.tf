@@ -15,12 +15,12 @@ resource "azurerm_virtual_network_gateway" "poc-local-vnet-gateway" {
   type     = "Vpn"
   vpn_type = "RouteBased"
 
-  sku = "VpnGw5"
+  sku = "VpnGw1"
 
   ip_configuration {
     name                          = "vnetGatewayConfig"
     public_ip_address_id          = azurerm_public_ip.poc-local-public-ip.id
-    private_ip_address_allocation = "Static"
+    private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.poc-local-subnet-1.id
   }
 }
@@ -30,7 +30,7 @@ resource "azurerm_local_network_gateway" "poc-local-local-gateway" {
   resource_group_name = azurerm_resource_group.msc-rg.name
   location            = azurerm_resource_group.msc-rg.location
   gateway_address     = "77.106.154.138"
-  address_space       = ["10.3.0.0/16"]
+  address_space       = ["192.168.1.0/24"]
 }
 
 
