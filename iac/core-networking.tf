@@ -86,6 +86,33 @@ resource "azurerm_network_security_group" "fortideceptor-decoy-nic-1-nsg" {
   name                = "fortideceptor-decoy-nic-1-nsg"
   location            = azurerm_resource_group.msc-rg.location
   resource_group_name = azurerm_resource_group.msc-rg.name
+
+  security_rule {
+    name                       = "DenyAllInbound"
+    priority                   = 900
+    direction                  = "Inbound"
+    access                     = "Deny"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                   = "AllowDecoyPocVMInbound"
+    priority               = 100
+    direction              = "Inbound"
+    access                 = "Allow"
+    protocol               = "*"
+    source_port_range      = "*"
+    destination_port_range = "*"
+    source_address_prefixes = [
+      "10.1.1.4/32",
+      "77.106.154.138/32"
+    ]
+    destination_address_prefix = "10.0.2.11/32"
+  }
 }
 
 resource "azurerm_network_interface_security_group_association" "fortideceptor-decoy-nic-1-nsg-association" {
