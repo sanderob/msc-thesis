@@ -25,7 +25,7 @@ resource "azurerm_virtual_network_peering" "poc-local-decoy-vnet-peering" {
 
   allow_virtual_network_access           = true
   allow_forwarded_traffic                = true
-  allow_gateway_transit                  = false
+  allow_gateway_transit                  = true
   only_ipv6_peering_enabled              = false
   peer_complete_virtual_networks_enabled = false
   use_remote_gateways                    = false
@@ -44,6 +44,8 @@ resource "azurerm_virtual_network_peering" "poc-local-decoy-vnet-peering" {
 }
 
 resource "azurerm_virtual_network_peering" "decoy-poc-local-vnet-peering" {
+  depends_on = [azurerm_virtual_network_peering.decoy-poc-local-vnet-peering]
+
   name                      = "decoy-poc-local-vnet-peering"
   resource_group_name       = azurerm_resource_group.msc-rg.name
   virtual_network_name      = azurerm_virtual_network.vnet.name
@@ -54,7 +56,7 @@ resource "azurerm_virtual_network_peering" "decoy-poc-local-vnet-peering" {
   allow_gateway_transit                  = false
   only_ipv6_peering_enabled              = false
   peer_complete_virtual_networks_enabled = false
-  use_remote_gateways                    = false
+  use_remote_gateways                    = true
 
   local_subnet_names = [
     azurerm_subnet.decoy-subnet.name
