@@ -30,9 +30,8 @@ resource "azurerm_local_network_gateway" "poc-local-local-gateway" {
   resource_group_name = azurerm_resource_group.msc-rg.name
   location            = azurerm_resource_group.msc-rg.location
   gateway_address     = "77.106.154.138"
-  address_space       = ["192.168.1.0/24"]
+  address_space       = ["192.168.1.0/24", "77.106.154.138/32"]
 }
-
 
 resource "azurerm_virtual_network_gateway_connection" "poc-local-fortigate-local-connection" {
   name                = "fortigate-local-connection"
