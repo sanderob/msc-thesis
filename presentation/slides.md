@@ -78,10 +78,10 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 ## Methodology
 
-- **Continuous analysis of keystrokes**
-- Statistical methods
-- Trust Model
-- Authentication & Identification
+- Three main phases
+    - Literature Review
+    - Case Study
+    - Proof of Concept
 
 ---
 
