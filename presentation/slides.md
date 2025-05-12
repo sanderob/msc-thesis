@@ -89,7 +89,7 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 - Preliminary research
 - Acquire background knowledge
-- identify related works
+- Identify related works
 - Identify research gaps
 
 ---
