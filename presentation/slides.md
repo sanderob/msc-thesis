@@ -134,6 +134,17 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 ---
 
+## Proof of Concept (3)
+
+- 2 proof of concepts
+- Public cloud scenario
+- On premises scenario
+- Focus on:
+    - Scalability
+    - Adaptability
+
+---
+
 ## Results
 
 - The case study has resulted in a proposed model
