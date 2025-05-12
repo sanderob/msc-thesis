@@ -91,6 +91,7 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 - Acquire background knowledge
 - identify related works
 - Identify research gaps
+
 ---
 
 ## Case Study
@@ -121,6 +122,23 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 - CI/CD and Version Control
     - GitHub
     - GitHub Actions
+
+---
+
+## Results
+
+- The case study has resulted in a proposed model
+- The PoC has proven the feasibility of the model
+- A contribution is identified and a gap is decreased
+- A step on the way to an automated honeypot-as-a-service product
+
+---
+
+## Future Work
+
+- This is just a step on the way
+- Preliminary research for the purpose of feasibility
+- The complete gap is yet to be closed
 
 ---
 
