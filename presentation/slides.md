@@ -6,7 +6,7 @@ class: invert
 title: "Optimizing Honeypot Deployment Stretagies: Towards Automated Delivery of Honeypot-as-a-service"
 author: Sander Osvik Brekke
 header: Optimizing Honeypot Deployment Stretagies – S. O. Brekke
-footer: May 2024
+footer: May 2025
 size: 16:9
 math: mathjax
 ---
