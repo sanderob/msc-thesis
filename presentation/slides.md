@@ -102,6 +102,28 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 ---
 
+## Proof of Concept
+
+- Implementation of a practical example
+- Makes up the thesis results
+- Proves fesibility
+- Improves insight for further research
+
+---
+
+## Proof of Concept (2)
+
+- Collaboration with Fortinet
+    - Fortinet FortiDeceptor have been used
+- Infrastructure as Code
+    - Terraform
+    - Microsoft Azure
+- CI/CD and Version Control
+    - GitHub
+    - GitHub Actions
+
+---
+
 <div style="margin: auto; margin-top: 15%; width: 30%">
 <h1>Questions?</h1>
 </div>
