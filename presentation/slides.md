@@ -41,13 +41,32 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 ---
 
-## Current State of the Art
+## Related Works
 
-- Tverrå (2023)
-- Continuous Determination
-- Scaled Manhattan Distance
-- 87% accuracy
-- Avg. # of keystrokes: 825
+- Honeypots are a well-known tool
+    - Used for research, detection, and prevention
+    - Many different types of honeypots
+- Wide research on the effectivness and use-cases
+
+---
+
+## Related Works (2)
+
+- Honeypot-as-a-service is not widespread
+    - Individualization, competence, manual deployment
+- YAKSHA project (2020)
+    - EU wide cooperation
+    - Pilot project
+    - No evidence of further work
+
+---
+
+## Related Works (3)
+
+- Jafarian and Niakanlahiji (2020)
+    - Model for planning honeypot deployment is proposed
+    - Focus on the choice of honeypots and effectiveness
+    - Includes planning phase
 
 ---
 
