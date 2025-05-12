@@ -103,6 +103,16 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 ---
 
+## Case Study (2)
+
+- Two different customers
+- Availability focused OT network topology
+- Confidentiality focused OT network topology
+- Identify decision points for PoC
+
+
+---
+
 ## Proof of Concept
 
 - Implementation of a practical example
