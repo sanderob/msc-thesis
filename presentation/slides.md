@@ -91,6 +91,14 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 - Acquire background knowledge
 - identify related works
 - Identify research gaps
+---
+
+## Case Study
+
+- Theoretical exploration of practical use cases
+- Look into Eidsiva Bredbånd's OT customer networks
+- Identify and develop deployment strategies
+- Makes up the foundation of the PoC
 
 ---
 
