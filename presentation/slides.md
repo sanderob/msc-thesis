@@ -85,13 +85,12 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 ---
 
-## Further Improvements and Work
+## Literature Review
 
-- Outlier removal
-    - Repeat in several iterations
-    - Perform different types
-- Feature selection
-    - Test for more/less influencing features
+- Preliminary research
+- Acquire background knowledge
+- identify related works
+- Identify research gaps
 
 ---
 
