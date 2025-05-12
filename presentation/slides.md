@@ -19,7 +19,7 @@ math: mathjax
 
 __SANDER O. BREKKE__
 _Supervisor @ NTNU:_ **Slobodan Petrovic**
-_Supervisor @ Eidsiva Bredbånd:_ Håkon Gunleifsen
+_Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 ---
 
