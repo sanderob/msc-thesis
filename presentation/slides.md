@@ -117,8 +117,7 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 - Implementation of a practical example
 - Makes up the thesis results
-- Proves fesibility
-- Improves insight for further research
+- Proves feasibility
 
 ---
 
