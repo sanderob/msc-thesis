@@ -31,9 +31,13 @@ _Supervisor @ Eidsiva Bredbånd:_ **Håkon Gunleifsen**
 
 ## Introduction
 
-- **Challenge:** Lack of trust in user-inputted age; potential grooming; age verification
-- **Goal:** Categorize users as above or below a certain age
-- **Proposed Solution:** Continuous age determination through keystroke dynamics with a statistical approach
+- **Challenge:**
+    - Securing OT systems is difficult.
+    - Honeypots is a tool, but requires competence and individualization.
+- **Goal:**
+    - The deployment model is automatable, but still effective.
+    - A step on the road towards Honeypot-as-a-service.
+- **Proposed Solution:** Design a deployment model where automation is possible.
 
 ---
 
