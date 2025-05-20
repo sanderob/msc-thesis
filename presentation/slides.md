@@ -3,9 +3,9 @@ marp: true
 theme: gaia
 paginate: true
 class: invert
-title: "Optimizing Honeypot Deployment Stretagies: Towards Automated Delivery of Honeypot-as-a-service"
+title: "Optimizing Honeypot Deployment Strategies: Towards Automated Delivery of Honeypot-as-a-service"
 author: Sander Osvik Brekke
-header: Optimizing Honeypot Deployment Stretagies – S. O. Brekke
+header: Optimizing Honeypot Deployment Strategies – S. O. Brekke
 footer: May 2025
 size: 16:9
 math: mathjax
@@ -15,7 +15,7 @@ math: mathjax
     img[alt="center"] { display: block; margin: 0 auto; }
 </style>
 
-### **Optimizing Honeypot Deployment Stretagies:** Towards Automated Delivery of Honeypot-as-a-service
+### **Optimizing Honeypot Deployment Strategies:** Towards Automated Delivery of Honeypot-as-a-service
 
 __SANDER O. BREKKE__
 _Supervisor @ NTNU:_ **Slobodan Petrovic**
