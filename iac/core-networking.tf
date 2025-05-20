@@ -109,7 +109,8 @@ resource "azurerm_network_security_group" "fortideceptor-decoy-nic-1-nsg" {
     destination_port_range = "*"
     source_address_prefixes = [
       "10.1.1.4/32",
-      "77.106.154.138/32"
+      "77.106.154.138/32",
+      "192.168.1.0/24"
     ]
     destination_address_prefix = "10.0.2.11/32"
   }
